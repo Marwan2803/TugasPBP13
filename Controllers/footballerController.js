@@ -1,114 +1,112 @@
-const footballersService = require("../services/footballersService");
+const moviesService = require("../services/moviesService");
 
-const getLigabelanda = async (req, res, next) => {
+const getActionMovies = async (req, res, next) => {
   try {
-    const footballers = await footballersService.getAllFootballerLigabelanda();
-    res.status(200).json({ message: "Pemain berhasil diambil", footballers });
-  } catch (error) {
-    next(error);
-  }
-};
-const getLigainggris = async (req, res, next) => {
-  try {
-    const footballers = await footballersService.getAllFootballerLigaingggris();
-    res.status(200).json({ message: "Pemain berhasil diambil", footballers });
-  } catch (error) {
-    next(error);
-  }
-};
-const getLigajerman = async (req, res, next) => {
-  try {
-    const footballers = await footballersService.getAllFootballerLigajerman();
-    res.status(200).json({ message: "Pemain berhasil diambil", footballers });
-  } catch (error) {
-    next(error);
-  }
-};
-const getLigaprancis = async (req, res, next) => {
-  try {
-    const footballers = await footballersService.getAllFootballerLigaprancis();
-    res.status(200).json({ message: "Pemain berhasil diambil", footballers });
-  } catch (error) {
-    next(error);
-  }
-};
-const getLigaspanyol = async (req, res, next) => {
-  try {
-    const footballers = await footballersService.getAllFootballerLigaspanyol();
-    res.status(200).json({ message: "Pemain berhasil diambil", footballers });
+    const movies = await moviesService.getAllActionMovies();
+    res.status(200).json({ message: "Film berhasil diambil", movies });
   } catch (error) {
     next(error);
   }
 };
 
-const insertFootballer = async (req, res, next) => {
-  const liga = req.params.liga;
-  const { nama, umur, posisi, NA, KA, KSI, harga } = req.body;
+const getComedyMovies = async (req, res, next) => {
+  try {
+    const movies = await moviesService.getAllComedyMovies();
+    res.status(200).json({ message: "Film berhasil diambil", movies });
+  } catch (error) {
+    next(error);
+  }
+};
+
+const getDramaMovies = async (req, res, next) => {
+  try {
+    const movies = await moviesService.getAllDramaMovies();
+    res.status(200).json({ message: "Film berhasil diambil", movies });
+  } catch (error) {
+    next(error);
+  }
+};
+
+const getHorrorMovies = async (req, res, next) => {
+  try {
+    const movies = await moviesService.getAllHorrorMovies();
+    res.status(200).json({ message: "Film berhasil diambil", movies });
+  } catch (error) {
+    next(error);
+  }
+};
+
+const getSciFiMovies = async (req, res, next) => {
+  try {
+    const movies = await moviesService.getAllSciFiMovies();
+    res.status(200).json({ message: "Film berhasil diambil", movies });
+  } catch (error) {
+    next(error);
+  }
+};
+
+const insertMovie = async (req, res, next) => {
+  const genre = req.params.genre;
+  const { title, director, releaseYear, rating } = req.body;
 
   try {
-    const insertFootballer = await footballersService.insertFootballer(
-      liga,
-      nama,
-      umur,
-      posisi,
-      NA,
-      KA,
-      KSI,
-      harga
+    const insertedMovie = await moviesService.insertMovie(
+      genre,
+      title,
+      director,
+      releaseYear,
+      rating
     );
 
     res.status(201).json({
-      message: "Pemain berhasil ditambahkan ke liga " + liga,
-      insertFootballer,
+      message: "Film berhasil ditambahkan ke genre " + genre,
+      insertedMovie,
     });
   } catch (error) {
     next(error);
   }
 };
 
-const updateFootballer = async (req, res, next) => {
+const updateMovie = async (req, res, next) => {
   const id = parseInt(req.params.id);
-  const liga = req.params.liga;
+  const genre = req.params.genre;
 
-  const { nama, umur, posisi, NA, KA, KSI, harga } = req.body;
+  const { title, director, releaseYear, rating } = req.body;
 
   try {
-    const updateFootballer = await footballersService.updateFootballer(
+    const updatedMovie = await moviesService.updateMovie(
       id,
-      liga,
-      nama,
-      umur,
-      posisi,
-      NA,
-      KA,
-      KSI,
-      harga
+      genre,
+      title,
+      director,
+      releaseYear,
+      rating
     );
-    res.status(200).json({ message: "Data pemain berhasil diupdate!" });
+    res.status(200).json({ message: "Data film berhasil diupdate!" });
   } catch (error) {
     console.log(error);
     next(error);
   }
 };
 
-const deleteFootballer = async (req, res, next) => {
+const deleteMovie = async (req, res, next) => {
   const id = parseInt(req.params.id);
-  const liga = req.params.liga;
+  const genre = req.params.genre;
   try {
-    const deleteUser = await footballersService.deleteFootballer(liga, id);
-    res.status(202).json({ message: "Data pemain berhasil dihapus!" });
+    const deletedMovie = await moviesService.deleteMovie(genre, id);
+    res.status(202).json({ message: "Data film berhasil dihapus!" });
   } catch (error) {
     next(error);
   }
 };
 
 module.exports = {
-  getLigabelanda,
-  getLigainggris,
-  getLigajerman,
-  getLigaprancis,
-  getLigaspanyol,
-  insertFootballer,
-  updateFootballer,
-  deleteFootballer,
+  getActionMovies,
+  getComedyMovies,
+  getDramaMovies,
+  getHorrorMovies,
+  getSciFiMovies,
+  insertMovie,
+  updateMovie,
+  deleteMovie,
 };
