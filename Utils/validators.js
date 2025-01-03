@@ -1,16 +1,17 @@
 const { BadRequestError } = require("./errors");
 
-const validateInsert = (nama, umur, posisi, NA, KA, KSI, harga) => {
-  if (!(nama && umur && posisi && NA && KA && KSI && harga)) {
+const validateInsert = (title, director, releaseYear, genre, rating) => {
+  if (!(title && director && releaseYear && genre && rating)) {
     throw new BadRequestError(
-      "Nama, umur, posisi, NA, KA, KSI, dan harga harus diisi!"
+      "Title, director, releaseYear, genre, dan rating harus diisi!"
     );
   }
 };
-const validateUpdate = (nama, umur, posisi, NA, KA, KSI, harga) => {
-  if (!(nama && umur && posisi && NA && KA && KSI && harga)) {
+
+const validateUpdate = (title, director, releaseYear, genre, rating) => {
+  if (!(title && director && releaseYear && genre && rating)) {
     throw new BadRequestError(
-      "Nama, umur, posisi, NA, KA, KSI, dan harga harus diisi!"
+      "Title, director, releaseYear, genre, dan rating harus diisi!"
     );
   }
 };
