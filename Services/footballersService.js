@@ -1,97 +1,74 @@
 const prisma = require("../prisma/client");
 const { validateInsert, validateUpdate } = require("../utils/validators");
 
-const getAllFootballerLigabelanda = async () => {
-  const footballersResponse = await prisma.ligabelanda.findMany();
-  return { footballers: footballersResponse };
+const getAllActionMovies = async () => {
+  const moviesResponse = await prisma.actionMovies.findMany();
+  return { movies: moviesResponse };
 };
 
-const getAllFootballerLigaingggris = async () => {
-  const footballersResponse = await prisma.ligainggris.findMany();
-  return { footballers: footballersResponse };
+const getAllComedyMovies = async () => {
+  const moviesResponse = await prisma.comedyMovies.findMany();
+  return { movies: moviesResponse };
 };
 
-const getAllFootballerLigajerman = async () => {
-  const footballersResponse = await prisma.ligajerman.findMany();
-  return { footballers: footballersResponse };
+const getAllDramaMovies = async () => {
+  const moviesResponse = await prisma.dramaMovies.findMany();
+  return { movies: moviesResponse };
 };
 
-const getAllFootballerLigaprancis = async () => {
-  const footballersResponse = await prisma.ligaprancis.findMany();
-  return { footballers: footballersResponse };
+const getAllHorrorMovies = async () => {
+  const moviesResponse = await prisma.horrorMovies.findMany();
+  return { movies: moviesResponse };
 };
 
-const getAllFootballerLigaspanyol = async () => {
-  const footballersResponse = await prisma.ligaspanyol.findMany();
-  return { footballers: footballersResponse };
+const getAllSciFiMovies = async () => {
+  const moviesResponse = await prisma.sciFiMovies.findMany();
+  return { movies: moviesResponse };
 };
 
-const insertFootballer = async (
-  liga,
-  nama,
-  umur,
-  posisi,
-  NA,
-  KA,
-  KSI,
-  harga
-) => {
-  validateInsert(nama, umur, posisi, NA, KA, KSI, harga);
-  const insertedFootballer = await prisma[liga].create({
+const insertMovie = async (genre, title, director, releaseYear, rating) => {
+  validateInsert(title, director, releaseYear, rating);
+  const insertedMovie = await prisma[genre].create({
     data: {
-      nama,
-      umur,
-      posisi,
-      NA,
-      KA,
-      KSI,
-      harga,
+      title,
+      director,
+      releaseYear,
+      genre,
+      rating,
     },
   });
-  return { insertedFootballer };
+  return { insertedMovie };
 };
 
-const updateFootballer = async (
-  id,
-  liga,
-  nama,
-  umur,
-  posisi,
-  NA,
-  KA,
-  KSI,
-  harga
-) => {
-  validateUpdate(nama, umur, posisi, NA, KA, KSI, harga);
-  const updatedFootballer = await prisma[liga].update({
+const updateMovie = async (id, genre, title, director, releaseYear, rating) => {
+  validateUpdate(title, director, releaseYear, rating);
+  const updatedMovie = await prisma[genre].update({
     where: { id: id },
     data: {
-      nama,
-      umur,
-      posisi,
-      NA,
-      KA,
-      KSI,
-      harga,
+      title,
+      director,
+      releaseYear,
+      genre,
+      rating,
     },
   });
-  return { updatedFootballer };
+  return { updatedMovie };
 };
 
-const deleteFootballer = async (liga, id) => {
-  const deletedFootballer = await prisma[liga].delete({
+const deleteMovie = async (genre, id) => {
+  const deletedMovie = await prisma[genre].delete({
     where: { id: id },
   });
-  return { deletedFootballer };
+  return { deletedMovie };
 };
 
 module.exports = {
-  getAllFootballerLigabelanda,
-  getAllFootballerLigaingggris,
-  getAllFootballerLigajerman,
-  getAllFootballerLigaprancis,
-  getAllFootballerLigaspanyol,
-  insertFootballer,
-  updateFootballer,
-  deleteFootballer,
+  getAllActionMovies,
+  getAllComedyMovies,
+  getAllDramaMovies,
+  getAllHorrorMovies,
+  getAllSciFiMovies,
+  insertMovie,
+  updateMovie,
+  deleteMovie,
 };
