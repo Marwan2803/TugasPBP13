@@ -1,24 +1,24 @@
 const express = require("express");
 const {
-  getLigabelanda,
-  getLigainggris,
-  getLigajerman,
-  getLigaprancis,
-  getLigaspanyol,
-  insertFootballer,
-  updateFootballer,
-  deleteFootballer,
-} = require("../controllers/footballerController");
+  getActionMovies,
+  getComedyMovies,
+  getDramaMovies,
+  getHorrorMovies,
+  getSciFiMovies,
+  insertMovie,
+  updateMovie,
+  deleteMovie,
+} = require("../controllers/movieController");
 
 const router = express.Router();
 
-router.get("/ligabelanda", getLigabelanda);
-router.get("/ligainggris", getLigainggris);
-router.get("/ligajerman", getLigajerman);
-router.get("/ligaprancis", getLigaprancis);
-router.get("/ligaspanyol", getLigaspanyol);
-router.post("/pemain/:liga", insertFootballer);
-router.put("/pemain/:liga/:id", updateFootballer);
-router.delete("/pemain/:liga/:id", deleteFootballer);
+router.get("/action", getActionMovies);
+router.get("/comedy", getComedyMovies);
+router.get("/drama", getDramaMovies);
+router.get("/horror", getHorrorMovies);
+router.get("/sci-fi", getSciFiMovies);
+router.post("/movie/:genre", insertMovie);
+router.put("/movie/:genre/:id", updateMovie);
+router.delete("/movie/:genre/:id", deleteMovie);
 
 module.exports = router;
